@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const articles = require('./routes/articles');
@@ -26,7 +25,6 @@ mongoose.connect('mongodb://localhost:27017/diploma_database', {
 });
 app.use(limiter);
 app.use(requestLogger);
-
 app.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
@@ -41,9 +39,9 @@ app.post('/api/signup', celebrate({
   }),
 }), signUp);
 app.use(auth);
-app.use('/', users);
-app.use('/', articles);
-app.use('/', errorpage);
+app.use('/api/', users);
+app.use('/api/', articles);
+app.use('/api/', errorpage);
 app.use(errorLogger);
 app.use(errors());
 app.use(ErrM);
