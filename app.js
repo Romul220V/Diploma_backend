@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const articles = require('./routes/articles');
@@ -10,7 +11,6 @@ const errorpage = require('./routes/404');
 const { signUp, signIn } = require('./controllers/user');
 const auth = require('./middlewares/auth');
 const ErrM = require('./middlewares/ErrMiddleware');
-const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/ReqLog');
 
 const { PORT = 3000 } = process.env;
@@ -22,6 +22,10 @@ mongoose.connect('mongodb://localhost:27017/diploma_database', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
+});
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100,
 });
 app.use(limiter);
 app.use(requestLogger);
@@ -46,4 +50,4 @@ app.use('/', errorpage);
 app.use(errorLogger);
 app.use(errors());
 app.use(ErrM);
-app.listen(PORT, () => {});
+app.listen(PORT, () => { });
