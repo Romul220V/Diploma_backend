@@ -27,13 +27,13 @@ mongoose.connect('mongodb://localhost:27017/diploma_database', {
 app.use(limiter);
 app.use(requestLogger);
 
-app.post('/signin', celebrate({
+app.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
     password: Joi.string().required(),
   }),
 }), signIn);
-app.post('/signup', celebrate({
+app.post('/api/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
     password: Joi.string().required(),
