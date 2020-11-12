@@ -25,6 +25,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator(v) {
+        // eslint-disable-next-line no-useless-escape
         return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v);
       },
       message: (props) => `${props.value} is not an url`,
@@ -35,6 +36,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator(v) {
+        // eslint-disable-next-line no-useless-escape
         return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(v);
       },
       message: (props) => `${props.value} is not a correct url for image`,

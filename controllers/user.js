@@ -29,7 +29,7 @@ module.exports.signIn = (req, res, next) => {
         .status(200).send({ message: 'logged in' });
     })
     .catch((err) => {
-      next(new AuthWrong({ message: err.message }));
+      next(new AuthWrong(err.message));
     });
 };
 
@@ -42,6 +42,7 @@ module.exports.getUserMe = (req, res, next) => {
     .catch(() => next(new Error()));
 };
 
+// eslint-disable-next-line consistent-return
 module.exports.signUp = (req, res, next) => {
   const {
     email, password, name,
