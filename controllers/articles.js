@@ -14,7 +14,7 @@ module.exports.delArticleId = (req, res, next) => {
   Article.findOne({ _id: req.params.articleId, owner })
     .orFail(() => new Error('Not Found'))
     .then((article) => {
-      if (owner !== article.owner) {
+      if (owner !== article.owner.toString()) {
         return Promise.reject(new Error('Denied'));
       }
       return Article.findOneAndRemove({ _id: req.params.articleId });
@@ -34,9 +34,10 @@ module.exports.delArticleId = (req, res, next) => {
 module.exports.createArticle = (req, res, next) => {
   const {
     keyword, title, text, date, source, link, image,
+    owner = req.user._id,
   } = req.body;
   Article.create({
-    keyword, title, text, date, source, link, image,
+    keyword, title, text, date, source, link, image, owner,
   })
     .then((article) => res.send({ data: article }))
     .catch((err) => {

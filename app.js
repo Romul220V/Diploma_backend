@@ -1,13 +1,13 @@
 require('dotenv').config();
-const helmet = require('helmet');
 const express = require('express');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const allRoutes = require('./index');
 const ErrMiddleware = require('./middlewares/ErrMiddleware');
 const limiter = require('./middlewares/ratelimiter');
 const { requestLogger, errorLogger } = require('./middlewares/ReqLog');
-const allRoutes = require('./index');
 
 const {
   PORT = 3000, BASE_PATH, NODE_ENV, DATABASE,
@@ -23,7 +23,8 @@ mongoose.connect(baseAdress, {
 });
 app.use(limiter);
 app.use(requestLogger);
-app.use(helmet(allRoutes));
+app.use(helmet());
+app.use(allRoutes);
 app.use(errorLogger);
 app.use(errors());
 app.use(ErrMiddleware);

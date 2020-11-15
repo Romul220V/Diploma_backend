@@ -42,7 +42,6 @@ module.exports.getUserMe = (req, res, next) => {
     .catch(() => next(new Error()));
 };
 
-// eslint-disable-next-line consistent-return
 module.exports.signUp = (req, res, next) => {
   const {
     email, password, name,
@@ -62,11 +61,11 @@ module.exports.signUp = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new SmthnWrong('Переданы некорректные данные'));
-      } else if (err.name === 'MongoError' && err.code === 11000) {
-        next(new Conflict('Данный почтовый ящик уже зарегистрирован'));
-      } else {
-        next(new Error());
+        return next(new SmthnWrong('Переданы некорректные данные'));
+      } if (err.name === 'MongoError' && err.code === 11000) {
+        return next(new Conflict('Данный почтовый ящик уже зарегистрирован'));
       }
+      return next(new Error());
     });
+  return 0;
 };
