@@ -1,0 +1,46 @@
+{
+  "name": "search_engine_alpha",
+  "version": "0.0.1",
+  "description": "backend_part",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Romul220V/Diploma_backend.git"
+  },
+  "author": "Romul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Romul220V/Diploma_backend/issues"
+  },
+  "homepage": "https://github.com/Romul220V/Diploma_backend#readme",
+  "devDependencies": {
+    "node": "^15.0.1",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^13.0.4",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "express-winston": "^4.0.5",
+    "helmet": "^4.2.0",
+    "jquery": "^3.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.13",
+    "mongoose-type-url": "^2.1.0",
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
+  }
+}
