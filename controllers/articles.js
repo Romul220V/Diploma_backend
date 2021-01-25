@@ -4,7 +4,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const AuthDenied = require('../errors/AuthDenied');
 
 module.exports.getArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .then((articles) => res.send({ data: articles }))
     .catch(() => next(new Error()));
 };

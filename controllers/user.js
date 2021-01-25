@@ -25,8 +25,7 @@ module.exports.signIn = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res
-        .cookie('jwt', token, { httpOnly: true, sameSite: true })
-        .status(200).send({ message: 'logged in' });
+        .status(200).send({ token });
     })
     .catch((err) => {
       next(new AuthWrong(err.message));

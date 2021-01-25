@@ -5,7 +5,10 @@ const users = require('./routes/users');
 const errorpage = require('./routes/404');
 const { signUp, signIn } = require('./controllers/user');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/CORS');
 
+router.use(cors);
+router.options('*', function (req, res) { res.sendStatus(200); });
 router.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
